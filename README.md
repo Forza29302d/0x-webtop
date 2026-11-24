@@ -30,6 +30,7 @@ GitHub Codespace (Ubuntu dev container)
 
    The very first start is the slow one: it pulls the ~1.5 GB image, then downloads Chrome (~120 MB). That can take several minutes and the `postStartCommand` stays running until it finishes. Progress shows up in the **Dev Containers** log as `[webtop-setup]` lines; later starts only re-check that Chrome is present and take seconds.
 3. **Open port 3000.** Go to the **Ports** tab in VS Code / the Codespaces UI. Port `3000` is forwarded automatically and labelled **Webtop Desktop**. Click the globe / **Open in Browser** icon next to it.
+   - Port `3000` is configured as **public**: anyone who gets its URL can reach the desktop. Do not use this with sensitive data; change its visibility to **Private** in the Ports tab if you want access restricted to your GitHub account.
    - If the port is not listed, add it manually: **Ports → Forward a Port → `3000`**.
    - No certificate warning: the container serves plain HTTP on 3000 and the Codespaces proxy terminates TLS for you. (If you ever see a self-signed cert warning, you are on port 3001 instead.)
 4. **Start working.** You land directly on the XFCE desktop, with Chrome in the menu and a launcher on the desktop.
