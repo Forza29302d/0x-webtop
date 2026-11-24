@@ -1,0 +1,15 @@
+{
+  "name": "Ubuntu Webtop Desktop",
+  "image": "mcr.microsoft.com/devcontainers/base:ubuntu",
+  "features": {
+    "ghcr.io/devcontainers/features/docker-in-docker:2": {}
+  },
+  "forwardPorts": [3000],
+  "portsAttributes": {
+    "3000": {
+      "label": "Webtop Desktop",
+      "onAutoForward": "notify"
+    }
+  },
+  "postStartCommand": "until docker info >/dev/null 2>&1; do sleep 1; done; docker start webtop 2>/dev/null || docker run -d --name=webtop --security-opt seccomp=unconfined --shm-size=\"2gb\" -p 3000:3000 -e PUID=1000 -e PGID=1000 -e TZ=Australia/Brisbane -v /workspaces/${localWorkspaceFolderBasename}/webtop-config:/config -v /workspaces/${localWorkspaceFolderBasename}/webtop-setup:/webtop-setup:ro --restart unless-stopped lscr.io/linuxserver/webtop:ubuntu-xfce; for i in $(seq 1 60); do docker exec webtop true 2>/dev/null && break; sleep 1; done; docker exec -u root webtop /webtop-setup/install-google-chrome.sh"
+}
