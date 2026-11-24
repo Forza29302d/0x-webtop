@@ -10,6 +10,9 @@ Chrome is installed by `webtop-setup/install-google-chrome.sh`.
 
 Key design decisions, so they don't get "fixed" back:
 
+- **Pin the base image to Ubuntu 24.04.** The floating `ubuntu` tag advanced to
+  Ubuntu resolute, where the Docker-in-Docker feature's default Moby packages
+  are unavailable. Keep a base release supported by the feature.
 - **Port 3000, not 3001.** The image exposes 3000 (HTTP) and 3001 (HTTPS). 3000 is
   used because the Codespaces proxy terminates TLS, giving the browser a secure
   context (required for WebCodecs/Opus audio) with no self-signed cert warning.
